@@ -24,12 +24,11 @@ class App extends Component {
     // Find the text field via the React ref
     const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
 
-    Tasks.insert({
-      text,
-      createdAt: new Date(), // current time
-      owner: Meteor.userId(),           // _id of logged in user
-      username: Meteor.user().username,  // username of logged in user
-    });
+    if (text.length === 0) {
+      return;
+    }
+
+    Meteor.call('tasks.insert', text);
 
     // Clear form
     ReactDOM.findDOMNode(this.refs.textInput).value = '';
@@ -79,13 +78,6 @@ class App extends Component {
             </form> : ''
           }
 
-          <form className="new-task" onSubmit={this.handleSubmit.bind(this)} >
-            <input
-              type="text"
-              ref="textInput"
-              placeholder="Type to add new tasks"
-            />
-          </form>
         </header>
 
         <ul>
@@ -103,9 +95,14 @@ App.propTypes = {
 };
 
 export default createContainer(() => {
+
+  let tasks = Tasks.find({}, { sort: { createdAt: -1 } }).fetch();
+  let incompleteCount = Tasks.find({ checked: { $ne: true } }).count();
+  let currentUser = Meteor.user();
+
   return {
-    tasks: Tasks.find({}, { sort: { createdAt: -1 } }).fetch(),
-    incompleteCount: Tasks.find({ checked: { $ne: true } }).count(),
-    currentUser: Meteor.user(),
+    tasks,
+    incompleteCount,
+    currentUser
   };
 }, App);
