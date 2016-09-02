@@ -1,7 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
+import { createContainer } from 'meteor/react-meteor-data';
 
 // Dashboard component
-export default class Dashboard extends Component {
+class Dashboard extends Component {
 
   constructor(props) {
     super(props);
@@ -20,3 +21,12 @@ export default class Dashboard extends Component {
   }
 
 }
+
+export default DashboardContainer = createContainer(props => {
+
+  let sample = 'sample';
+
+  return {
+    sample
+  };
+}, Dashboard);
