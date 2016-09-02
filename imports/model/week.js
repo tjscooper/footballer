@@ -12,7 +12,7 @@ export default Week = Class.create({
   collection: WeeksCollection,
   fields: {
     leagueId: String,
-    nflWeek: String,
+    nflWeek: Number,
     createdAt: Date,
     games: [Game]
   }

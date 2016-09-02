@@ -19,7 +19,7 @@ if (Meteor.isServer) {
 
         week = new Week({
           leagueId: '123',
-          nflWeek: '1',
+          nflWeek: 1,
           createdAt: new Date(),
           games: []
         });
@@ -28,7 +28,7 @@ if (Meteor.isServer) {
 
         week2 = new Week({
           leagueId: '123',
-          nflWeek: '2',
+          nflWeek: 2,
           createdAt: new Date(),
           games: []
         });
@@ -47,20 +47,20 @@ if (Meteor.isServer) {
       it('can update a week using weeks.update method', () => {
         const method = Meteor.server.method_handlers['weeks.update'];
 
-        week = Week.findOne({ nflWeek: '1' });
+        week = Week.findOne({ nflWeek: 1 });
 
         // Run the method with `this` set to the fake invocation
-        method.apply({}, [week, 'nflWeek', '2']);
+        method.apply({}, [week, 'nflWeek', 2]);
 
-        week2 = Week.findOne({ nflWeek: '2' });
+        week2 = Week.findOne({ nflWeek: 2 });
         expect(week2).to.be.an('object');
-        expect(week2.nflWeek).to.equal('2');
+        expect(week2.nflWeek).to.equal(2);
       });
 
       it('can delete a week using weeks.remove method', () => {
         const method = Meteor.server.method_handlers['weeks.remove'];
 
-        week = Week.findOne({ nflWeek: '1' });
+        week = Week.findOne({ nflWeek: 1 });
 
         method.apply({}, [week]);
 

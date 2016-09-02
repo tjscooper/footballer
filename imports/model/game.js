@@ -23,6 +23,15 @@ export default Game = Class.create({
     visitor: Team,
     quarter: String,
     time: String,
-    redZone: Number
+    day: String,
+    redZone: Number,
+    winner: {
+      type: Object,
+      default: []
+    },
+    spread: {
+      type: Object,
+      default: {}
+    }
   }
 });
