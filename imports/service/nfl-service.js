@@ -1,10 +1,11 @@
 import request from 'request';
+import rp from 'request-promise';
+import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
 import _ from 'lodash';
 
 // import { nflData } from '../api/weeks.tests.data.js';
 import Week from '../model/week.js';
-import WeekService from '../service/week-service.js';
 import GameService from '../service/game-service.js';
 
 export default class NFLService {
@@ -22,11 +23,15 @@ export default class NFLService {
       json: true
     };
 
-    request(options, NFLService._parseScores);
+    rp(options)
+      .then(Meteor.bindEnvironment(NFLService._parseScores))
+      .catch(err => {
+        console.log("err:", err);
+      });
 
   }
 
-  static loadScores() {
+  static getStaticScores() {
 
     const nflData = {
        "w": 4,
@@ -296,18 +301,19 @@ export default class NFLService {
     // Find week
     let week = Week.findOne({ nflWeek: data.w });
 
-    // if week !exists, insert week and return, next job run will add games...
+    // if week !exists, insert week and continue...
     if (!week) {
 
-      let week = new Week({
+      let new_week = new Week({
         leagueId: '2016-17',
         nflWeek: data.w,
         createdAt: new Date(),
         games: []
       });
 
-      Meteor.call('weeks.insert', week);
-      return;
+      Meteor.call('weeks.insert', new_week);
+
+      week = Week.findOne({ nflWeek: data.w });
     }
 
     // parse games
@@ -317,6 +323,5 @@ export default class NFLService {
     Meteor.call('weeks.update', week, 'games', games);
 
   }
-
 
 }

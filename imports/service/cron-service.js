@@ -29,7 +29,11 @@ export default class CronService {
         return parser.text('every 30 seconds');
       },
       job: function() {
-        NFLService.loadScores();
+        // Live Data
+        // NFLService.getScores();
+
+        // Mock Data
+        NFLService.getStaticScores();
       }
     });
 
