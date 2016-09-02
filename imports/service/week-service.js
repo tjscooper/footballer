@@ -1,3 +1,5 @@
+import Week from '../model/week.js';
+
 export default class WeekService {
 
   constructor() {
