@@ -30,10 +30,10 @@ export default class CronService {
       },
       job: function() {
         // Live Data
-        NFLService.getScores();
+        // NFLService.getScores();
 
         // Mock Data
-        // NFLService.getStaticScores();
+        NFLService.getStaticScores();
       }
     });
 
