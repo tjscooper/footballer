@@ -1,7 +1,6 @@
-import request from 'request';
-import rp from 'request-promise';
 import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random';
+import request from 'request';
 import _ from 'lodash';
 
 // import { nflData } from '../api/weeks.tests.data.js';
@@ -23,11 +22,7 @@ export default class NFLService {
       json: true
     };
 
-    rp(options)
-      .then(Meteor.bindEnvironment(NFLService._parseScores))
-      .catch(err => {
-        console.log("err:", err);
-      });
+    request(options, Meteor.bindEnvironment(NFLService._parseScores));
 
   }
 
