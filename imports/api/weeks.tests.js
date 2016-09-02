@@ -6,7 +6,6 @@ import { expect } from 'meteor/practicalmeteor:chai';
 
 import Week, { WeeksCollection } from '../model/week.js';
 import Weeks from './weeks.js';
-import nflData from './weeks.tests.data.js';
 
 if (Meteor.isServer) {
   describe('Weeks', () => {

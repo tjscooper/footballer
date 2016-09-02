@@ -26,7 +26,7 @@ export default class CronService {
       name: 'Get scores from NFL website',
       schedule: function(parser) {
         // parser is a later.parse object
-        return parser.text('every 30 seconds');
+        return parser.text('every 5 minutes');
       },
       job: function() {
         // Live Data
