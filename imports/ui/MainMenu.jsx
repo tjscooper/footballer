@@ -23,7 +23,6 @@ export default class MainMenu extends Component {
     let menuItems = [
       { title: 'Dashboard', path: '/' },
       { title: 'Picks', path: '/picks' },
-      { title: 'Odds', path: '/odds' },
       { title: 'Settings', path: '/settings' },
     ];
 
