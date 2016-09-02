@@ -28,6 +28,10 @@ export default Game = Class.create({
     winner: {
       type: Object,
       default: []
+    },
+    spread: {
+      type: Object,
+      default: {}
     }
   }
 });

@@ -21,6 +21,7 @@ import _ from 'lodash';
 import Game from '../model/game.js';
 import Team from '../model/team.js';
 import TeamService from '../service/team-service.js';
+import SpreadService from './spread-service.js';
 
 export default class GameService {
 
@@ -61,17 +62,11 @@ export default class GameService {
     // returns h/v Team Class objects from service
     let { homeTeam, visitorTeam } = TeamService.getTeams(game);
 
-    // mock proline fav and spread
-    let randomFav = Math.floor((Math.random() * 2) + 1) === 1 ? homeTeam.city : visitorTeam.city;
-    let randomSpread = -Math.round((Math.random() * 10) + 1).toFixed(1);
+    // returns Spread Class object
+    let spread = SpreadService.getSpread(homeTeam, visitorTeam);
 
-    let winner = GameService._getWinner(
-      homeTeam,
-      visitorTeam,
-      { // roughed-in pointspread data
-        fav: randomFav,
-        spread: randomSpread
-      });
+    // returns [String] of winner or winners if tied / spread ties the score
+    let winner = GameService._getWinner(homeTeam, visitorTeam, spread);
 
     return new Game({
       nflGameId: game.eid,
@@ -82,12 +77,27 @@ export default class GameService {
       redZone: game.rz,
       home: homeTeam,
       visitor: visitorTeam,
-      winner
+      winner,
+      spread
     });
 
   }
 
-  static _getWinner(home, visitor, spread) {
+  static _getWinner(homeTeam, visitorTeam, spread) {
+
+    let home = _.clone(homeTeam);
+    let visitor = _.clone(visitorTeam);
+
+    if (!_.isEmpty(spread)) {
+
+      // Adjust score of fav team
+      if (home.city === spread.fav) {
+        home.score += spread.points
+      } else if (visitor.city === spread.fav) {
+        visitor.score += spread.points
+      }
+
+    }
 
     let winner = null;
 
@@ -103,13 +113,9 @@ export default class GameService {
       // Visitor Winning
       winner = [visitor.city];
 
-    } else {
-      // Edge cases
-      winner = [];
     }
 
     return winner;
-
   }
 
 }

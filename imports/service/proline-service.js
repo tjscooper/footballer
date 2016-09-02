@@ -1,6 +1,8 @@
 import request from 'request';
 import _ from 'lodash';
 
+import SpreadService from '../service/spread-service.js';
+
 export default class ProlineService {
 
   constructor() {
@@ -22,6 +24,7 @@ export default class ProlineService {
 
   static loadPointSpread() {
 
+    // @TODO Replace with RAW data to parse once NFL pointspread is available
     const prolineData = {};
 
     ProlineService._parsePointSpread(null, true, prolineData);
