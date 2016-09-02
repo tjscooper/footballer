@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import MainMenu from './MainMenu.jsx';
+import AccountsUIWrapper from './AccountsUIWrapper.jsx';
 
 class App extends Component {
 
@@ -13,7 +14,14 @@ class App extends Component {
     return (
       <div className="ui container">
         <div className="main-header">
-          <h3>Footballer</h3>
+          <div className="ui clearing basic segment">
+            <div className="ui right floated header login" style={{ fontSize: '14px' }}>
+              <AccountsUIWrapper />
+            </div>
+            <h3 className="ui left floated header">
+              Footballer
+            </h3>
+          </div>
         </div>
         <MainMenu />
         <div className="main-content">

@@ -11,6 +11,14 @@ body {
   margin-bottom: -6px;
 }
 
+.login {
+  padding-top: 18px;
+}
+
 .main-content {
   margin-top: 12px;
+}
+
+.ui.dropdown .menu {
+  left: -225%;
 }
