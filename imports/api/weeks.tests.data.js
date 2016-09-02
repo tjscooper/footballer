@@ -1,4 +1,4 @@
-export default nflData = {
+export const nflData = {
    "w": 4,
    "gms":    [
             {

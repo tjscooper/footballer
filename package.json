@@ -7,11 +7,13 @@
   "dependencies": {
     "bcrypt": "^0.8.7",
     "classnames": "^2.2.5",
+    "lodash": "^4.15.0",
     "meteor-node-stubs": "~0.2.0",
     "react": "^15.3.1",
     "react-addons-pure-render-mixin": "^15.3.1",
     "react-dom": "^15.3.1",
-    "react-mounter": "^1.2.0"
+    "react-mounter": "^1.2.0",
+    "request": "^2.74.0"
   },
   "devDependencies": {
     "autoprefixer": "^6.3.1"
