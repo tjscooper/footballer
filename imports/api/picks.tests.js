@@ -11,8 +11,8 @@ if (Meteor.isServer) {
   describe('Picks', () => {
     describe('methods', () => {
       const userId = Random.id();
-      const gameId = Random.id();
-      const gameId2 = Random.id();
+      const nflGameId = 20161003;
+      const nflGameId2 = 20161004;
 
       let pick;
       let pick2;
@@ -22,7 +22,7 @@ if (Meteor.isServer) {
 
         pick = new Pick({
           userId,
-          gameId,
+          nflGameId,
           createdAt: new Date(),
           city: 'DAL'
         });
@@ -31,7 +31,7 @@ if (Meteor.isServer) {
 
         pick2 = new Pick({
           userId,
-          gameId: gameId2,
+          nflGameId: nflGameId2,
           createdAt: new Date(),
           city: 'CAR'
         });
@@ -53,12 +53,12 @@ if (Meteor.isServer) {
       it('can update a pick using picks.update method', () => {
         const method = Meteor.server.method_handlers['picks.update'];
 
-        pick = Pick.findOne({ gameId });
+        pick = Pick.findOne({ nflGameId });
 
         // Run the method with `this` set to the fake invocation
         method.apply({}, [pick, 'city', 'SEA']);
 
-        pick2 = Pick.findOne({ gameId });
+        pick2 = Pick.findOne({ nflGameId });
         expect(pick2).to.be.an('object');
         expect(pick2.city).to.equal('SEA');
       });
@@ -66,12 +66,40 @@ if (Meteor.isServer) {
       it('can delete a pick using picks.remove method', () => {
         const method = Meteor.server.method_handlers['picks.remove'];
 
-        pick = Pick.findOne({ gameId });
+        pick = Pick.findOne({ nflGameId });
 
         method.apply({}, [pick]);
 
         // Verify that the method does what we expected
         expect(Pick.find().count()).to.equal(0);
+      });
+
+      it('can create a pick using picks.select method', () => {
+        const method = Meteor.server.method_handlers['picks.select'];
+
+        let selection = { nflGameId: 20161005, city: 'WAS' };
+
+        let invocation = { userId };
+
+        method.apply(invocation, [selection]);
+
+        // Verify that the method does what we expected
+        expect(Pick.find().count()).to.equal(2);
+      });
+
+      it('can update a pick using picks.select method', () => {
+        const method = Meteor.server.method_handlers['picks.select'];
+
+        let selection = { nflGameId: 20161003, city: 'WAS' };
+
+        let invocation = { userId };
+
+        method.apply(invocation, [selection]);
+
+        let pick = Pick.findOne({ nflGameId });
+
+        // Verify that the method does what we expected
+        expect(pick.city).to.equal('WAS');
       });
 
     });

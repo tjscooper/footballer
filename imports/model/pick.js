@@ -10,7 +10,7 @@ export default Pick = Class.create({
   collection: PicksCollection,
   fields: {
     userId: String,
-    gameId: String,
+    nflGameId: Number,
     createdAt: Date,
     city: String
   }

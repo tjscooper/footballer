@@ -13,4 +13,5 @@ Meteor.methods({
   'picks.insert'(model) { return PickService.insert(model); },
   'picks.update'(model, field, value) { return PickService.update(model, field, value); },
   'picks.remove'(model) { return PickService.remove(model); },
+  'picks.select'(model) { return PickService.select(this.userId, model); },
 });

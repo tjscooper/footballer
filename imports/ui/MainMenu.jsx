@@ -23,13 +23,19 @@ export default class MainMenu extends Component {
     let menuItems = [
       { title: 'Dashboard', path: '/' },
       { title: 'Picks', path: '/picks' },
-      { title: 'Settings', path: '/settings' },
+      // { title: 'Settings', path: '/settings' },
     ];
 
     return (
       <div className="ui secondary menu">
         {
           menuItems.map((item, index) => {
+
+            // Only show picks menu item when user is logged in
+            if (item.title === 'Picks' && !Meteor.user()) {
+              return null;
+            }
+
             return <a className={ this.getActivePath(item) } href={ item.path } key={ index }>{ item.title }</a>
           })
         }
