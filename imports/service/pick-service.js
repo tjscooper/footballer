@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import Pick from '../model/pick.js';
 
 export default class PickService {
@@ -12,9 +14,9 @@ export default class PickService {
       throw new Meteor.Error('picks.insert: invalid model');
     }
 
-    let pick = Pick.findOne({ gameId: model.gameId });
+    let pick = Pick.findOne({ nflGameId: model.nflGameId });
     if (pick instanceof Pick) {
-      throw new Meteor.Error(`picks.insert: pick ${ model.gameId } exists`);
+      throw new Meteor.Error(`picks.insert: pick ${ model.nflGameId } exists`);
     }
 
     model.save();
@@ -39,6 +41,29 @@ export default class PickService {
     }
 
     model.remove();
+
+  }
+
+  static select(userId, selection) {
+
+    let { nflGameId, city } = selection;
+
+    let pick = Pick.findOne({ userId, nflGameId });
+
+    if (_.isNil(pick)) {
+
+      let new_pick = new Pick({
+        userId,
+        nflGameId,
+        createdAt: new Date(),
+        city
+      });
+
+      PickService.insert(new_pick)
+      return;
+    }
+
+    PickService.update(pick, 'city', city);
 
   }
 }

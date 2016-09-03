@@ -16,7 +16,8 @@ body {
 }
 
 .main-content {
-  margin-top: 12px;
+  margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .ui.dropdown .menu {
