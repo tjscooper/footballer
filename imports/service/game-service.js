@@ -118,4 +118,24 @@ export default class GameService {
     return winner;
   }
 
+  static getWinningCount(user, games) {
+
+    let userId = user._id;
+    let picks = [];
+    let winningCount = 0;
+
+    // Iterate through each game, locate the pick for each respective user,
+    // if pick is also the game winner, add to winning count
+    _.each(games, game => {
+      _.each(game.pick, pick => {
+        if (pick.userId === userId && game.winner.indexOf(pick.city) > -1 ) {
+          winningCount++;
+        }
+      });
+    });
+
+    return winningCount;
+
+  }
+
 }
