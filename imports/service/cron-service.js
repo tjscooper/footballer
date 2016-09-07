@@ -24,6 +24,22 @@ export default class CronService {
   static register() {
 
     SyncedCron.add({
+      name: 'Get inital week from NFL website',
+      schedule: function(parser) {
+        // parser is a later.parse object
+        return parser.text('at 12:00 pm on Tues');
+        // return parser.text('every 30 seconds');
+      },
+      job: function() {
+        // Live Data
+        NFLService.getScores();
+
+        // Mock Data
+        // NFLService.getStaticScores();
+      }
+    });
+
+    SyncedCron.add({
       name: 'Get scores from NFL website',
       schedule: function(parser) {
         // parser is a later.parse object
