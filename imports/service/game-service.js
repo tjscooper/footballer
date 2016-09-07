@@ -127,7 +127,7 @@ export default class GameService {
     // if pick is also the game winner, add to winning count
     _.each(games, game => {
       _.each(game.pick, pick => {
-        if (pick.userId === userId && game.winner.indexOf(pick.city) > -1 ) {
+        if (game.quarter !== 'P' && pick.userId === userId && game.winner.indexOf(pick.city) > -1 ) {
           winningCount++;
         }
       });
