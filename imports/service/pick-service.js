@@ -14,7 +14,7 @@ export default class PickService {
       throw new Meteor.Error('picks.insert: invalid model');
     }
 
-    let pick = Pick.findOne({ nflGameId: model.nflGameId });
+    let pick = Pick.findOne({ nflGameId: model.nflGameId, userId: model.userId });
     if (pick instanceof Pick) {
       throw new Meteor.Error(`picks.insert: pick ${ model.nflGameId } exists`);
     }

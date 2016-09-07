@@ -23,3 +23,18 @@ body {
 .ui.dropdown .menu {
   left: -225%;
 }
+
+p.quarter {
+  font-size: 12px;
+  line-height: 12px;
+}
+
+p.spread {
+  font-size: 12px;
+  line-height: 12px;
+}
+
+.footer.segment {
+  background-color: #000000;
+  padding: 5em 0em;
+}

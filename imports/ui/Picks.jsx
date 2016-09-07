@@ -84,21 +84,23 @@ export default PicksContainer = createContainer(props => {
     // Find the latest week
     week = Week.find({}, { sort: { createdAt: -1 } }, { limit: 1 }).fetch()[0];
 
-    // Get a subset of nflGameId's from this week's games
-    let gameIds = _.map(week.games, 'nflGameId');
+    if (!_.isNil(week)) {
+      // Get a subset of nflGameId's from this week's games
+      let gameIds = _.map(week.games, 'nflGameId');
 
-    // Get user picks (must be logged in)
-    picks = Pick.find({}, { $in: { nflGameId: gameIds, userId: Meteor.userId() } }).fetch();
+      // Get user picks (must be logged in)
+      picks = Pick.find({}, { $in: { nflGameId: gameIds, userId: Meteor.userId() } }).fetch();
 
-    // Add picks to games (for quick styling)
-    _.each(week.games, game => {
+      // Add picks to games (for quick styling)
+      _.each(week.games, game => {
 
-      let { nflGameId } = game;
-      let pick = _.find(picks, { nflGameId }) || { city: null };
+        let { nflGameId } = game;
+        let pick = _.find(picks, { nflGameId, userId: Meteor.userId() }) || { city: null };
 
-      game.pick = pick;
-
-    })
+        game.pick = pick;
+        
+      });
+    }
   }
 
   return {

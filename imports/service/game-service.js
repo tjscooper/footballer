@@ -85,18 +85,17 @@ export default class GameService {
 
   static _getWinner(homeTeam, visitorTeam, spread) {
 
-    let home = _.clone(homeTeam);
-    let visitor = _.clone(visitorTeam);
+    let home = _.cloneDeep(homeTeam);
+    let visitor = _.cloneDeep(visitorTeam);
 
     if (!_.isEmpty(spread)) {
 
       // Adjust score of fav team
       if (home.city === spread.fav) {
-        home.score += spread.points
+        home.score -= spread.points
       } else if (visitor.city === spread.fav) {
-        visitor.score += spread.points
+        visitor.score -= spread.points
       }
-
     }
 
     let winner = null;
@@ -116,6 +115,26 @@ export default class GameService {
     }
 
     return winner;
+  }
+
+  static getWinningCount(user, games) {
+
+    let userId = user._id;
+    let picks = [];
+    let winningCount = 0;
+
+    // Iterate through each game, locate the pick for each respective user,
+    // if pick is also the game winner, add to winning count
+    _.each(games, game => {
+      _.each(game.pick, pick => {
+        if (pick.userId === userId && game.winner.indexOf(pick.city) > -1 ) {
+          winningCount++;
+        }
+      });
+    });
+
+    return winningCount;
+
   }
 
 }
