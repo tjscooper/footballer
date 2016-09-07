@@ -11,11 +11,14 @@ export default class SpreadService {
   static getFav(points, homeCity, visitorCity) {
 
     // In Proline data, they pass the home team score with a space in front
-    // ex. " -7.5", so if string length is 5, it's a home pick, 4 for visitor
-    return points.length === 5 ? homeCity : visitorCity;
+    // ex. " -7.5", so if indexOf ' ' === 0, it's a home pick, otherwise visitor
+    return points.indexOf(' ') === 0 ? homeCity : visitorCity;
+
   }
 
   static getSpread(home, visitor) {
+
+    console.log("home:", home);
 
     // find spread where home and visitor teams are present
     let spread = Spread.findOne({ homeCity: home.city, visitorCity: visitor.city });

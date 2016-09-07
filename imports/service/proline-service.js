@@ -16,7 +16,7 @@ export default class ProlineService {
       json: true
     };
 
-    request(options, ProlineService._parsePointSpread);
+    request(options, Meteor.bindEnvironment(ProlineService._parsePointSpread));
 
   }
 
@@ -395,8 +395,28 @@ export default class ProlineService {
     _.each(eventDays, eventDay => {
       _.each(eventDay, events => {
         _.each(events, event => {
-          // @TODO create an NFL team dictionary to filter out NFL teams
+
           if (_.isObject(event) && event.sport === 'FTB') {
+
+            if (event.home === 'JAK') {
+              event.home = 'JAX';
+            }
+            if (event.visitor === 'JAK') {
+              event.visitor = 'JAX';
+            }
+            if (event.home === 'NWO') {
+              event.home = 'NO';
+            }
+            if (event.visitor === 'NWO') {
+              event.visitor = 'NO';
+            }
+            if (event.home === 'ARZ') {
+              event.home = 'ARI';
+            }
+            if (event.visitor === 'ARZ') {
+              event.visitor = 'ARI';
+            }
+
             games.push(event);
           }
         });

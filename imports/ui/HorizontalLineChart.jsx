@@ -28,7 +28,7 @@ class HorizontalLineChart extends Component {
           xAxes: [{
             ticks: {
                 min: 0,
-                max: 16,
+                max: props.week.games.length,
                 stepSize: 4
             }
           }]
