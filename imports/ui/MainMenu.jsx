@@ -18,11 +18,22 @@ export default class MainMenu extends Component {
 
   }
 
+  getMenuItemIcon(item) {
+
+    let itemCSS = {
+      'tasks': item.iconName === 'tasks',
+      'star': item.iconName === 'star'
+    };
+
+    return classnames(itemCSS, 'icon');
+
+  }
+
   render() {
 
     let menuItems = [
-      { title: 'Dashboard', path: '/' },
-      { title: 'Picks', path: '/picks' },
+      { title: 'Dashboard', path: '/', iconName: 'tasks' },
+      { title: 'Picks', path: '/picks', iconName: 'star' },
       // { title: 'Settings', path: '/settings' },
     ];
 
@@ -36,7 +47,11 @@ export default class MainMenu extends Component {
               return null;
             }
 
-            return <a className={ this.getActivePath(item) } href={ item.path } key={ index }>{ item.title }</a>
+            return (
+              <a className={ this.getActivePath(item) } href={ item.path } key={ index }>
+                <i className={ this.getMenuItemIcon(item) }></i> { item.title }
+              </a>
+            );
           })
         }
       </div>

@@ -85,18 +85,17 @@ export default class GameService {
 
   static _getWinner(homeTeam, visitorTeam, spread) {
 
-    let home = _.clone(homeTeam);
-    let visitor = _.clone(visitorTeam);
+    let home = _.cloneDeep(homeTeam);
+    let visitor = _.cloneDeep(visitorTeam);
 
     if (!_.isEmpty(spread)) {
 
       // Adjust score of fav team
       if (home.city === spread.fav) {
-        home.score += spread.points
+        home.score -= spread.points
       } else if (visitor.city === spread.fav) {
-        visitor.score += spread.points
+        visitor.score -= spread.points
       }
-
     }
 
     let winner = null;

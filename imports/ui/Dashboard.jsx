@@ -3,6 +3,7 @@ import { createContainer } from 'meteor/react-meteor-data';
 import _ from 'lodash';
 
 import HorizontalLineChartContainer from './HorizontalLineChart.jsx';
+import Games from './Games.jsx';
 import GameService from '../service/game-service';
 
 // Dashboard component
@@ -14,7 +15,7 @@ class Dashboard extends Component {
 
   render() {
 
-    let { week, users } = this.props;
+    let { week, picks, users } = this.props;
 
     if (!week || !users) {
       return null;
@@ -27,6 +28,10 @@ class Dashboard extends Component {
           users={ users }
           getWinningCount={ GameService.getWinningCount } />
         <div className="ui divider hidden"></div>
+        <Games
+          week={ week }
+          picks={ picks }
+          users={ users } />
       </div>
     );
   }

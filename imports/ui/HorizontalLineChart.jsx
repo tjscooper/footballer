@@ -12,7 +12,7 @@ class HorizontalLineChart extends Component {
 
     this.state = {
       width: 400,
-      height: 320,
+      height: 240,
       data: null,
       options: {
         legend: {
@@ -103,11 +103,8 @@ export default HorizontalLineChartContainer = createContainer(props => {
 
 
   _.each(users, user => {
-
     labels.push(_.upperFirst(user.username));
-    dataset.backgroundColor.push(randomColor());
     dataset.data.push(getWinningCount(user, week.games));
-
   });
 
   let data = {
