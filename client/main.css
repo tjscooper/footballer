@@ -26,10 +26,15 @@ body {
 
 p.quarter {
   font-size: 12px;
-  line-height: 0px;
+  line-height: 12px;
 }
 
 p.spread {
   font-size: 12px;
   line-height: 12px;
+}
+
+.footer.segment {
+  background-color: #000000;
+  padding: 5em 0em;
 }
