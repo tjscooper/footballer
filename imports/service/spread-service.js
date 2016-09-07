@@ -18,8 +18,6 @@ export default class SpreadService {
 
   static getSpread(home, visitor) {
 
-    console.log("home:", home);
-
     // find spread where home and visitor teams are present
     let spread = Spread.findOne({ homeCity: home.city, visitorCity: visitor.city });
 
