@@ -27,7 +27,7 @@ export default class CronService {
       name: 'Get inital week from NFL website',
       schedule: function(parser) {
         // parser is a later.parse object
-        return parser.text('at 10:10 am on Tues');
+        return parser.text('on Wed at 10:30 am');
         // return parser.text('every 30 seconds');
       },
       job: function() {
@@ -59,7 +59,7 @@ export default class CronService {
       name: 'Get point spread from Proline website',
       schedule: function(parser) {
         // parser is a later.parse object
-        return parser.text('at 10:15 am on Tues');
+        return parser.text('on Wed at 10:25 am');
         // return parser.text('every 30 seconds');
       },
       job: function() {
