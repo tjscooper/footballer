@@ -11,3 +11,5 @@ Navigate to app root folder and type:
 ## tests
 Run tests, open browser to localhost:3300 to view results:
 `meteor test --driver-package practicalmeteor:mocha --port 3300`
+
+## build / deploy
