@@ -19,13 +19,13 @@ export default class Picks extends Component {
       <div className="ui three column centered grid">
         <div className="grey row">
           <div className="column">
-            <p>Home</p>
+            <p>Visitor</p>
           </div>
           <div className="column">
             <p>Spread</p>
           </div>
           <div className="column">
-            <p>Visitor</p>
+            <p>Home</p>
           </div>
         </div>
       </div>
@@ -98,7 +98,7 @@ export default PicksContainer = createContainer(props => {
         let pick = _.find(picks, { nflGameId, userId: Meteor.userId() }) || { city: null };
 
         game.pick = pick;
-        
+
       });
     }
   }

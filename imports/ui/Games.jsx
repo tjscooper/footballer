@@ -20,13 +20,13 @@ export default class Games extends Component {
         <div className="grey row">
           <div className="two wide column"></div>
           <div className="four wide column">
-            <p>Home</p>
+            <p>Visitor</p>
           </div>
           <div className="four wide column">
             <p></p>
           </div>
           <div className="four wide column">
-            <p>Visitor</p>
+            <p>Home</p>
           </div>
           <div className="two wide column"></div>
         </div>
@@ -65,8 +65,8 @@ export default class Games extends Component {
         {
           _.map(games, (game, index) => {
 
-            game.home.picks = Games.getUserNameForLabel(users, _.filter(picks, { city: game.home.city }));
             game.visitor.picks = Games.getUserNameForLabel(users, _.filter(picks, { city: game.visitor.city }));
+            game.home.picks = Games.getUserNameForLabel(users, _.filter(picks, { city: game.home.city }));
 
             return <Game game={ game } key={ index } />
           })

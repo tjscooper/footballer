@@ -37,8 +37,14 @@ export default class PickGame extends Component {
       case 'F':
         msg = `Final`;
         break;
+      case 'F':
+        msg = `Final (OT)`;
+        break;
       case 'P':
         msg = `${ day } ${ time }`;
+        break;
+      case 'H':
+        msg = `Half-time`;
         break;
       default:
         msg = `Q ${ quarter }`;
@@ -57,7 +63,7 @@ export default class PickGame extends Component {
     let acceptedQuarters = ['1', '2', '3', '4', 'F', 'FO', 'H'];
 
     let picksText = '';
-    let position = side === 'home' ? 'left' : 'right';
+    let position = side === 'home' ? 'right' : 'left';
 
     let popupPosition = `top ${ position }`;
 
@@ -95,8 +101,20 @@ export default class PickGame extends Component {
       <div className="row">
         <div className="two wide column">
           <span style={{ float: 'left', fontSize: '8px' }}>
-            { this.renderPickLabels(game.quarter, game.home.picks, 'home') }
+            { this.renderPickLabels(game.quarter, game.visitor.picks, 'visitor') }
           </span>
+        </div>
+        <div className="four wide column">
+          <div className="ui mini statistic">
+            { this.renderScore(game.visitor.city, game.visitor.score, game.winner) }
+            <div className="label">
+              { game.visitor.city }
+            </div>
+          </div>
+        </div>
+        <div className="four wide column">
+          <p className="quarter">{ this.renderGameTimeOrQuarter(game.quarter, game.time, game.day) }</p>
+          <p className="spread">{ this.renderSpread(game.spread) }</p>
         </div>
         <div className="four wide column">
           <div className="ui mini statistic">
@@ -106,21 +124,9 @@ export default class PickGame extends Component {
             </div>
           </div>
         </div>
-        <div className="four wide column">
-          <p className="quarter">{ this.renderGameTimeOrQuarter(game.quarter, game.time, game.day) }</p>
-          <p className="spread">{ this.renderSpread(game.spread) }</p>
-        </div>
-        <div className="four wide column">
-          <div className="ui mini statistic" style={{ float: 'left', display: 'inline' }}>
-            { this.renderScore(game.visitor.city, game.visitor.score, game.winner) }
-            <div className="label">
-              { game.visitor.city }
-            </div>
-          </div>
-        </div>
         <div className="two wide column">
           <span style={{ float: 'right', fontSize: '8px' }}>
-            { this.renderPickLabels(game.quarter, game.visitor.picks, 'visitor') }
+            { this.renderPickLabels(game.quarter, game.home.picks, 'home') }
           </span>
         </div>
       </div>

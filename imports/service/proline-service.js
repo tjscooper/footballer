@@ -11,6 +11,8 @@ export default class ProlineService {
 
   static getPointSpread() {
 
+    console.log("Getting spreads...");
+
     let options = {
       url: `https://www.proline.ca/olg-proline-services/rest/api/pointspread/events/all.json`,
       json: true

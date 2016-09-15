@@ -1,0 +1,24 @@
+{
+  "apps" : [{
+    "name"        : "footballer",
+    "script"      : "main.js",
+    "args"        : [],
+    "watch"       : true,
+    "node_args"   : "--harmony",
+    "merge_logs"  : true,
+    "cwd"         : "/var/www/footballer/bundle",
+    "env": {
+      "NODE_ENV": "development",
+      "MONGO_URL": "mongodb://localhost:27017/footballer",
+      "PORT": 8080,
+      "ROOT_URL": "http://127.0.0.1:8080"
+    },
+    "env_production" : {
+       "NODE_ENV": "production"
+    },
+    "env_staging" : {
+       "NODE_ENV" : "staging",
+       "TEST"     : true
+    }
+  }]
+}

@@ -15,6 +15,8 @@ export default class NFLService {
 
   static getScores() {
 
+    console.log("Getting scores...");
+
     let random = Random.id();
 
     let options = {
