@@ -10,6 +10,9 @@ export default class PickGame extends Component {
   }
 
   renderSpread(spread) {
+    if (_.isEmpty(spread)) {
+      return `-`;
+    }
     return `${ spread.fav } by ${ Math.abs(spread.points) }`;
   }
 

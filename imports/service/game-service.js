@@ -64,7 +64,7 @@ export default class GameService {
 
     // returns Spread Class object
     let spread = SpreadService.getSpread(homeTeam, visitorTeam);
-
+    
     // returns [String] of winner or winners if tied / spread ties the score
     let winner = GameService._getWinner(homeTeam, visitorTeam, spread);
 
