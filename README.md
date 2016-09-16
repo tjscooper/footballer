@@ -20,7 +20,9 @@ Upgrade node version `nvm install stable` should go to v6.5.0 or greater.
 
 From app root, run `demeteorizer --output ../footballer-build`
 
-Git commit and push
+Preview the build using `MONGO_URL=mongodb://localhost:27017/footballer PORT=8080 ROOT_URL=http://localhost:8080 npm start`
+
+Git commit and push (footballer-build repository)
 
 *server*
 
@@ -33,3 +35,40 @@ Restart the app `pm2 list` to get the app index, then `npm restart 0` (if 0 is i
 app output `tail -f /root/.pm2/logs/footballer-out.log`
 
 errors `tail -f /root/.pm2/logs/footballer-error.log`
+
+*server notes*
+
+installing nodejs on ubuntu `sudo apt-get install -y nodejs`
+
+*nginx notes*
+
+```
+server {
+    listen 80;
+
+    server_name example.com;
+
+    location / {
+        proxy_pass http://localhost:8080;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+
+    location /app2 {
+        proxy_pass http://localhost:8081;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```  
+
+test and restart nginx
+
+`sudo nginx -t`
+`sudo service nginx restart`
