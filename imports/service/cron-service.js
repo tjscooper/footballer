@@ -39,21 +39,21 @@ export default class CronService {
       }
     });
 
-    // SyncedCron.add({
-    //   name: 'Get scores from NFL website',
-    //   schedule: function(parser) {
-    //     // parser is a later.parse object
-    //     return parser.text('every 2 minutes every Thurs,Sun and Mon');
-    //     // return parser.text('every 30 seconds');
-    //   },
-    //   job: function() {
-    //     // Live Data
-    //     NFLService.getScores();
-    //
-    //     // Mock Data
-    //     // NFLService.getStaticScores();
-    //   }
-    // });
+    SyncedCron.add({
+      name: 'Get scores from NFL website',
+      schedule: function(parser) {
+        // parser is a later.parse object
+        return parser.text('every 2 minutes every Thurs,Sun and Mon');
+        // return parser.text('every 30 seconds');
+      },
+      job: function() {
+        // Live Data
+        NFLService.getScores();
+
+        // Mock Data
+        // NFLService.getStaticScores();
+      }
+    });
 
     SyncedCron.add({
       name: 'Get point spread from Proline website',
