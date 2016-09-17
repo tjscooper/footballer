@@ -116,7 +116,7 @@ export default class PickGame extends Component {
             </div>
           </div>
         </div>
-        <div className="four wide column">
+        <div className={ classnames('four wide column', { 'red': game.redZone === 1 }) }>
           <p className="quarter">{ this.renderGameTimeOrQuarter(game.quarter, game.time, game.day) }</p>
           <p className="spread">{ this.renderSpread(game.spread) }</p>
         </div>
