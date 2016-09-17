@@ -71,6 +71,7 @@ export default class PickGame extends Component {
     let popupPosition = `top ${ position }`;
 
     _.each(picks, (pick, index) => {
+
       picksText += `${ _.upperFirst(pick) }`;
       if (index !== picks.length -1 ) {
         picksText += ', ';

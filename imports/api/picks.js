@@ -4,8 +4,8 @@ import Pick from '../model/pick.js';
 import PickService from '../service/pick-service.js';
 
 if (Meteor.isServer) {
-  Meteor.publish('picks', function picksPublication(query = {}) {
-    return Pick.find(query);
+  Meteor.publish('picks', function picksPublication(gameIds) {
+    return Pick.find({}, { $in: { nflGameId: gameIds } });
   });
 }
 

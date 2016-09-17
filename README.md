@@ -24,11 +24,13 @@ Preview the build using `MONGO_URL=mongodb://localhost:27017/footballer PORT=808
 
 Git commit and push (footballer-build repository)
 
+
 *server*
 
 Pull latest and then run `npm install` from the project root
 
 Restart the app `pm2 list` to get the app index, then `npm restart 0` (if 0 is index)
+
 
 *server logs*
 
@@ -36,9 +38,21 @@ app output `tail -f /root/.pm2/logs/footballer-out.log`
 
 errors `tail -f /root/.pm2/logs/footballer-error.log`
 
+
 *server notes*
 
 installing nodejs on ubuntu `sudo apt-get install -y nodejs`
+
+*server db dump to local restore*
+
+log into server as user 'tjscooper', run `mongodump -d footballer -o footballer-dump` from outside of app folder
+
+make root the owner, `chown -R tjscooper footballer-dump`
+
+exit server and copy files from server to local folder using,
+`sudo scp -r tjscooper@middlelogic.com:/var/www/footballer-dump footballer-dump` and enter password
+
+drop and restore to local database using, `mongorestore --drop --db footballer footballer-dump/footballer`
 
 *nginx notes*
 

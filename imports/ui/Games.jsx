@@ -65,8 +65,10 @@ export default class Games extends Component {
         {
           _.map(games, (game, index) => {
 
-            game.visitor.picks = Games.getUserNameForLabel(users, _.filter(picks, { city: game.visitor.city }));
-            game.home.picks = Games.getUserNameForLabel(users, _.filter(picks, { city: game.home.city }));
+            let gamePicks = _.filter(picks, { nflGameId: game.nflGameId });
+
+            game.visitor.picks = Games.getUserNameForLabel(users, _.filter(gamePicks, { city: game.visitor.city }));
+            game.home.picks = Games.getUserNameForLabel(users, _.filter(gamePicks, { city: game.home.city }));
 
             return <Game game={ game } key={ index } />
           })
