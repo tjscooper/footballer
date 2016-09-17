@@ -52,7 +52,7 @@ export default class Picks extends Component {
   render() {
 
     // Do not render if awaiting subscriptions or user is not logged in
-    if (this.props.loading || !Meteor.user()) {
+    if (this.props.loading || !this.props.week || !Meteor.user()) {
       return null;
     }
 
