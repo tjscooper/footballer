@@ -17,11 +17,11 @@ export default class PickGame extends Component {
     return `${ spread.fav } by ${ Math.abs(spread.points) }`;
   }
 
-  renderScore(city, score, winner) {
+  renderScore(city, score, winner, quarter) {
 
     let color = 'black';
 
-    if (winner.length === 1 && city === winner[0] && score !== 0) {
+    if (winner.length === 1 && city === winner[0] && quarter !== 'P') {
       color = 'green';
     }
 
@@ -110,7 +110,7 @@ export default class PickGame extends Component {
         </div>
         <div className="four wide column">
           <div className="ui mini statistic">
-            { this.renderScore(game.visitor.city, game.visitor.score, game.winner) }
+            { this.renderScore(game.visitor.city, game.visitor.score, game.winner, game.quarter) }
             <div className="label">
               { game.visitor.city }
             </div>
@@ -122,7 +122,7 @@ export default class PickGame extends Component {
         </div>
         <div className="four wide column">
           <div className="ui mini statistic">
-            { this.renderScore(game.home.city, game.home.score, game.winner) }
+            { this.renderScore(game.home.city, game.home.score, game.winner, game.quarter) }
             <div className="label">
               { game.home.city }
             </div>

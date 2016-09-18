@@ -64,7 +64,7 @@ export default class GameService {
 
     // returns Spread Class object
     let spread = SpreadService.getSpread(homeTeam, visitorTeam);
-    
+
     // returns [String] of winner or winners if tied / spread ties the score
     let winner = GameService._getWinner(homeTeam, visitorTeam, spread);
 
@@ -102,7 +102,15 @@ export default class GameService {
 
     if (home.score === visitor.score) {
       // Tie Game
-      winner = [home.city, visitor.city];
+      if (_.isEmpty(spread)) {
+        winner = [home.city, visitor.city];
+      } else {
+        if (home.city === spread.fav) {
+          winner = [visitor.city];
+        } else if (visitor.city === spread.fav) {
+          winner = [home.city];
+        }
+      }
 
     } else if (home.score > visitor.score) {
       // Home Winning
