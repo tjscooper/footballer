@@ -295,6 +295,12 @@ export default class NFLService {
 
   static _parseScores(error, response, data) {
 
+    console.log('data', data);
+
+    if (_.isNil(data)) {
+      return;
+    }
+
     // Find week
     let week = Week.findOne({ nflWeek: data.w });
 

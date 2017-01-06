@@ -1,20 +1,39 @@
 import React, { Component, PropTypes } from 'react';
+import classnames from 'classnames';
 
-// Picks component
+import NFLService from '../service/nfl-service.js';
+import ProlineService from '../service/proline-service.js';
+
+// Settings component
 export default class Settings extends Component {
 
   constructor(props) {
     super(props);
   }
 
+  static getScores() {
+    NFLService.getScores();
+  }
+
+  static getSpreads() {
+    ProlineService.getPointSpread();
+  }
+
   render() {
     return (
       <div>
-        Settings<br />
-        Settings<br />
-        Settings<br />
-        Settings<br />
-        Settings<br />
+        <div className="ui divider hidden"></div>
+        <button
+          className={ classnames('ui button') }
+          onClick={ Settings.getScores.bind(null) }>
+            Get Picks
+        </button>
+        <button
+          className={ classnames('ui button') }
+          onClick={ Settings.getSpreads.bind(null) }>
+            Get Spreads
+        </button>
+        <div className="ui divider hidden"></div>
       </div>
     );
   }
