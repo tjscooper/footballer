@@ -400,6 +400,18 @@ export default class ProlineService {
 
           if (_.isObject(event) && event.sport === 'FTB') {
 
+			if (event.home === 'LACH') {
+				event.home = 'LAC';
+			}
+			if (event.visitor === 'LACH') {
+				event.visitor = 'LAC';
+			}
+			if (event.home === 'LAR') {
+				event.home = 'LA';
+			}
+			if (event.visitor === 'LAR') {
+				event.visitor = 'LA';
+			}
             if (event.home === 'JAK') {
               event.home = 'JAX';
             }
