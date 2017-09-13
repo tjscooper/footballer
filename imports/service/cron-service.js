@@ -59,7 +59,7 @@ export default class CronService {
       name: 'Get point spread from Proline website',
       schedule: function(parser) {
         // parser is a later.parse object
-        return parser.text('at 10:00 am');
+        return parser.text('at 10:00 am and 1:40pm');
         // return parser.text('every 30 seconds');
       },
       job: function() {
