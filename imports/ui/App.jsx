@@ -19,7 +19,7 @@ class App extends Component {
               <AccountsUIWrapper />
             </div>
             <h3 className="ui left floated header">
-              <i className="trophy icon"></i> Footballer
+              <i className="trophy icon"></i> Footballer 2.0
             </h3>
           </div>
         </div>
