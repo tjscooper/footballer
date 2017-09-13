@@ -295,8 +295,6 @@ export default class NFLService {
 
   static _parseScores(error, response, data) {
 
-    console.log('data', data);
-
     if (_.isNil(data)) {
       return;
     }
@@ -308,7 +306,7 @@ export default class NFLService {
     if (!week) {
 
       let new_week = new Week({
-        leagueId: '2016-17',
+        leagueId: '2017-18',
         nflWeek: data.w,
         createdAt: new Date(),
         games: []

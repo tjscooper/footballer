@@ -4,8 +4,8 @@ import Week from '../model/week.js';
 import WeekService from '../service/week-service.js';
 
 if (Meteor.isServer) {
-  Meteor.publish('weeks', function weeksPublication(query = {}) {
-    return Week.find(query);
+  Meteor.publish('weeks.last', function weeksPublication() {
+    return Week.find({}, { sort: { nflWeek: -1 }, limit: 1 });
   });
 }
 

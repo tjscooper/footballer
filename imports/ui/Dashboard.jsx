@@ -44,7 +44,7 @@ export default DashboardContainer = createContainer(props => {
   let picks, week, users;
 
   let subs = {
-    weeks: Meteor.subscribe('weeks'),
+    weeks: Meteor.subscribe('weeks.last'),
     picks: null,
     users: Meteor.subscribe('users'),
   };
@@ -52,7 +52,7 @@ export default DashboardContainer = createContainer(props => {
   if (subs.weeks.ready() && subs.users.ready()) {
 
     // Find the latest week
-    week = Week.find({}, { sort: { createdAt: -1 } }, { limit: 1 }).fetch()[0];
+    week = Week.find({}, { sort: { nflWeek: -1 }, limit: 1 }).fetch()[0];
 
     if (!_.isNil(week)) {
 
