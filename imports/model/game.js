@@ -3,17 +3,6 @@ import { Meteor } from 'meteor/meteor';
 
 import Team from './team.js';
 
-/* NFL Live Stream game obj
-{
-   "hs": 7,           // Home Score
-   "vs": 0,           // Visitor Score
-   "h": "DET",        // Home Team City abbr.
-   "v": "BUF",        // Visitor Team City abbr.
-   "vnn": "Bills",    // Visitor Team Nickname
-   "hnn": "Lions"     // Home Team Nickname
-}
-*/
-
 export default Game = Class.create({
   name: 'Game',
   fields: {
@@ -24,7 +13,16 @@ export default Game = Class.create({
     quarter: String,
     time: String,
     day: String,
-    redZone: Number,
+    redZone: Boolean,
+    gameClock: String,
+    down: Number,
+    yardsToGo: Number,
+    yardline: String,
+    yardlineSide: String,
+    yardlineNumber: String,
+    possessionTeamId: String,
+    possessionTeamAbbr: String,
+    alertPlayType: String,
     winner: {
       type: Object,
       default: []

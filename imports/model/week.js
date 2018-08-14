@@ -13,6 +13,7 @@ export default Week = Class.create({
   fields: {
     leagueId: String,
     nflWeek: Number,
+    seasonType: String,
     createdAt: Date,
     games: [Game]
   }

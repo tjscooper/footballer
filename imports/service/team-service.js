@@ -1,47 +1,26 @@
-import _ from 'lodash';
-
-/* NFL Live Stream team related obj properties
-  {
-    "hs": 13,             // Home score
-    "h": "TB",            // Home city
-    "hnn": "Buccaneers"   // Home nickname
-  },
-*/
-
 import Team from '../model/team.js';
-
 export default class TeamService {
 
-  constructor() {
-
-  }
+  constructor() {}
 
   static getTeams(game) {
-
     return {
-      homeTeam: TeamService._parseTeam(['h', 'hnn', 'hs'], game),
-      visitorTeam: TeamService._parseTeam(['v', 'vnn', 'vs'], game)
+      homeTeam: TeamService._parseTeam({
+        city: game.gameSchedule.homeTeam.abbr,
+        nickname: game.gameSchedule.homeNickname,
+        score: game.score.homeTeamScore.pointTotal,
+        teamId: game.gameSchedule.homeTeamId
+      }),
+      visitorTeam: TeamService._parseTeam({
+        city: game.gameSchedule.visitorTeam.abbr,
+        nickname: game.gameSchedule.visitorNickname,
+        score: game.score.visitorTeamScore.pointTotal,
+        teamId: game.gameSchedule.visitorTeamId
+      })
     };
-
   }
 
-  static _parseTeam(fields, game) {
-
-    /*
-    Team Class Schema:
-
-      city: String,
-      nickname: String,
-      score: Number
-
-    */
-
-    return new Team({
-      city: game[fields[0]],
-      nickname: game[fields[1]],
-      score: game[fields[2]]
-    });
-
+  static _parseTeam({ city, nickname, score, teamId }) {
+    return new Team({ city, nickname, score, teamId });
   }
-
 }

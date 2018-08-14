@@ -24,6 +24,7 @@ export default Team = Class.create({
   fields: {
     city: String,
     nickname: String,
-    score: Number
+    score: Number,
+    teamId: String
   }
 });

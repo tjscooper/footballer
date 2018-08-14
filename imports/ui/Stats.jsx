@@ -28,7 +28,7 @@ export default StatsContainer = createContainer(props => {
   let stats = [];
 
   let subs = {
-    gamesWon: Meteor.subscribe('stats.games.won', { leagueId: '2017-18' })
+    gamesWon: Meteor.subscribe('stats.games.won', { leagueId: '2018-19' })
   };
 
   if (subs.gamesWon.ready()) {
