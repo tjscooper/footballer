@@ -5,7 +5,7 @@ import WeekService from '../service/week-service.js';
 
 if (Meteor.isServer) {
   Meteor.publish('weeks.last', function weeksPublication() {
-    return Week.find({}, { sort: { nflWeek: -1 }, limit: 1 });
+    return Week.find({ leagueId: '2018-19' }, { sort: { nflWeek: -1 }, limit: 1 });
   });
 }
 

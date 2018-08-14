@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 import classnames from 'classnames';
 import mobile from 'is-mobile';
+import moment from 'moment';
 
 // Pick component
 export default class PickGame extends Component {
@@ -32,29 +33,12 @@ export default class PickGame extends Component {
     );
   }
 
-  renderGameTimeOrQuarter(quarter, time, day) {
-
-    let msg = '';
-
-    switch (quarter) {
-      case 'F':
-        msg = `Final`;
-        break;
-      case 'F':
-        msg = `Final (OT)`;
-        break;
-      case 'P':
-        msg = `${ day } ${ time }`;
-        break;
-      case 'H':
-        msg = `Half-time`;
-        break;
-      default:
-        msg = `Q ${ quarter }`;
-        break;
+  renderGameTimeOrQuarter(quarter, time, day, gameClock) {
+    if (quarter === 'FINAL') {
+      return `${ moment(day, 'MM-DD-YYYY').format('ddd') } ${ moment(time, 'HH:mm:ss').format('h:mma') }`;
+    } else {
+      return  `${gameClock} ${quarter}`;
     }
-
-    return msg;
   }
 
   renderPickLabels(quarter, picks, side) {
@@ -62,8 +46,6 @@ export default class PickGame extends Component {
     if (!Meteor.user()) {
       return null;
     }
-
-    let acceptedQuarters = ['1', '2', '3', '4', 'F', 'FO', 'H'];
 
     let picksText = '';
     let position = side === 'home' ? 'right' : 'left';
@@ -82,7 +64,7 @@ export default class PickGame extends Component {
       return picks.indexOf(Meteor.user().username) > -1 ? true : false;
     });
 
-    if (acceptedQuarters.indexOf(quarter) > -1 && !_.isEmpty(picks)) {
+    if (quarter !== 'FINAL' && !_.isEmpty(picks)) {
       return (
         <div
           className="ui icon button"
@@ -112,19 +94,19 @@ export default class PickGame extends Component {
           <div className="ui mini statistic">
             { this.renderScore(game.visitor.city, game.visitor.score, game.winner, game.quarter) }
             <div className="label">
-              { game.visitor.city }
+              { game.visitor.nickname }
             </div>
           </div>
         </div>
-        <div className={ classnames('four wide column', { 'red': game.redZone === 1 }) }>
-          <p className="quarter">{ this.renderGameTimeOrQuarter(game.quarter, game.time, game.day) }</p>
+        <div className="four wide column">
+          <p className="quarter">{ this.renderGameTimeOrQuarter(game.quarter, game.time, game.day, game.gameClock) }</p>
           <p className="spread">{ this.renderSpread(game.spread) }</p>
         </div>
         <div className="four wide column">
           <div className="ui mini statistic">
             { this.renderScore(game.home.city, game.home.score, game.winner, game.quarter) }
             <div className="label">
-              { game.home.city }
+              { game.home.nickname }
             </div>
           </div>
         </div>

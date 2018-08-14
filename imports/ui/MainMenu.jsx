@@ -25,7 +25,7 @@ export default class MainMenu extends Component {
       'tasks': item.iconName === 'tasks',
       'star': item.iconName === 'star',
       'child': item.iconName === 'child',
-      'cog': item.iconName === 'cog'
+      'cogs': item.iconName === 'cogs'
     };
 
     return classnames(itemCSS, 'icon');
@@ -33,13 +33,17 @@ export default class MainMenu extends Component {
   }
 
   render() {
+    let isAdmin = Meteor.user() && Meteor.user().username.toLowerCase() === 'tim';
 
     let menuItems = [
       { title: 'Dashboard', path: '/', iconName: 'tasks' },
       { title: 'Picks', path: '/picks', iconName: 'star' },
-      { title: 'Stats', path: '/stats', iconName: 'child' },
-      { title: '', path: '/settings', iconName: 'cog' }
+      { title: 'Stats', path: '/stats', iconName: 'child' }
     ];
+
+    if (isAdmin) {
+      menuItems.push({ title: '', path: '/settings', iconName: 'cogs' });
+    }
 
     return (
       <div className="ui secondary menu">

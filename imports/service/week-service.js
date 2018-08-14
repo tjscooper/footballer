@@ -12,7 +12,7 @@ export default class WeekService {
       throw new Meteor.Error('weeks.insert: invalid model');
     }
 
-    let week = Week.findOne({ nflWeek: model.nflWeek });
+    let week = Week.findOne({ nflWeek: model.nflWeek, leagueId: model.leagueId, seasonType: model.seasonType });
     if (week instanceof Week) {
       throw new Meteor.Error(`weeks.insert: week ${ model.nflWeek } exists`);
     }

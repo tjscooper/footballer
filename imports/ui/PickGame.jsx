@@ -32,7 +32,7 @@ export default class PickGame extends Component {
           <button
             className={ classnames('ui basic button', { 'positive' : game.visitor.city === game.pick.city, 'disabled': game.quarter !== 'P' }) }
             onClick={ PickGame.togglePick.bind(null, { nflGameId: game.nflGameId, city: game.visitor.city }) }>
-              { game.visitor.city }
+              { game.visitor.nickname }
           </button>
         </div>
         <div className="column">{ this.renderSpread(game.spread) }</div>
@@ -40,7 +40,7 @@ export default class PickGame extends Component {
           <button
             className={ classnames('ui basic button', { 'positive' : game.home.city === game.pick.city, 'disabled': game.quarter !== 'P'  }) }
             onClick={ PickGame.togglePick.bind(null, { nflGameId: game.nflGameId, city: game.home.city }) }>
-            { game.home.city }
+            { game.home.nickname }
           </button>
         </div>
       </div>

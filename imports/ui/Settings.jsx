@@ -26,8 +26,9 @@ export default class Settings extends Component {
         <button
           className={ classnames('ui button') }
           onClick={ Settings.getScores.bind(null) }>
-            Get Picks
+            Get Scores
         </button>
+        <hr />
         <button
           className={ classnames('ui button') }
           onClick={ Settings.getSpreads.bind(null) }>

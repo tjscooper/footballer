@@ -52,7 +52,7 @@ export default DashboardContainer = createContainer(props => {
   if (subs.weeks.ready() && subs.users.ready()) {
 
     // Find the latest week
-    week = Week.find({}, { sort: { nflWeek: -1 }, limit: 1 }).fetch()[0];
+    week = Week.find({ leagueId: '2018-19' }, { sort: { nflWeek: -1 }, limit: 1 }).fetch()[0];
 
     if (!_.isNil(week)) {
 
