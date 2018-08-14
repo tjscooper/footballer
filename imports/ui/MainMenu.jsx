@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import { FlowRouter } from 'meteor/kadira:flow-router';
 import classnames from 'classnames';
+import _ from 'lodash';
 
 // MainMenu component
 export default class MainMenu extends Component {
@@ -22,7 +23,9 @@ export default class MainMenu extends Component {
 
     let itemCSS = {
       'tasks': item.iconName === 'tasks',
-      'star': item.iconName === 'star'
+      'star': item.iconName === 'star',
+      'child': item.iconName === 'child',
+      'cog': item.iconName === 'cog'
     };
 
     return classnames(itemCSS, 'icon');
@@ -34,7 +37,8 @@ export default class MainMenu extends Component {
     let menuItems = [
       { title: 'Dashboard', path: '/', iconName: 'tasks' },
       { title: 'Picks', path: '/picks', iconName: 'star' },
-      // { title: 'Settings', path: '/settings' },
+      { title: 'Stats', path: '/stats', iconName: 'child' },
+      { title: '', path: '/settings', iconName: 'cog' }
     ];
 
     return (

@@ -15,7 +15,7 @@ export default class NFLService {
 
   static getScores() {
 
-    console.log("Getting scores...");
+    console.log("Getting scores...", new Date());
 
     let random = Random.id();
 
@@ -295,6 +295,10 @@ export default class NFLService {
 
   static _parseScores(error, response, data) {
 
+    if (_.isNil(data)) {
+      return;
+    }
+
     // Find week
     let week = Week.findOne({ nflWeek: data.w });
 
@@ -302,7 +306,7 @@ export default class NFLService {
     if (!week) {
 
       let new_week = new Week({
-        leagueId: '2016-17',
+        leagueId: '2018-19',
         nflWeek: data.w,
         createdAt: new Date(),
         games: []

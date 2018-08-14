@@ -75,14 +75,14 @@ export default PicksContainer = createContainer(props => {
   let picks, week;
 
   let subs = {
-    weeks: Meteor.subscribe('weeks'),
+    weeks: Meteor.subscribe('weeks.last'),
     picks: Meteor.subscribe('picks'),
   };
 
   if (subs.weeks.ready() && subs.picks.ready()) {
 
     // Find the latest week
-    week = Week.find({}, { sort: { createdAt: -1 } }, { limit: 1 }).fetch()[0];
+    week = Week.find({}, { sort: { nflWeek: -1 }, limit: 1 }).fetch()[0];
 
     if (!_.isNil(week)) {
       // Get a subset of nflGameId's from this week's games

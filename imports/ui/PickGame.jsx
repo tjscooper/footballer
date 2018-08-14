@@ -40,7 +40,7 @@ export default class PickGame extends Component {
           <button
             className={ classnames('ui basic button', { 'positive' : game.home.city === game.pick.city, 'disabled': game.quarter !== 'P'  }) }
             onClick={ PickGame.togglePick.bind(null, { nflGameId: game.nflGameId, city: game.home.city }) }>
-              { game.home.city }
+            { game.home.city }
           </button>
         </div>
       </div>
