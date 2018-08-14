@@ -391,6 +391,10 @@ export default class ProlineService {
 
   static _parsePointSpread(error, response, data) {
 
+    if (!data) {
+      throw new Meteor.Error('No data in Proline feed');
+    }
+
     let eventDays = data.events.eventList;
     let games = [];
 

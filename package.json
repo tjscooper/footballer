@@ -2,7 +2,8 @@
   "name": "footballer",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "test": "meteor test --driver-package practicalmeteor:mocha --port 3300"
   },
   "dependencies": {
     "bcrypt": "^0.8.7",

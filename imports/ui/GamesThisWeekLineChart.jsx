@@ -5,7 +5,7 @@ import { Chart } from 'chart.js';
 import { randomColor } from 'randomcolor';
 
 // Horizontal Line Chart component
-class HorizontalLineChart extends Component {
+class GamesThisWeekLineChart extends Component {
 
   constructor(props) {
     super(props);
@@ -63,7 +63,7 @@ class HorizontalLineChart extends Component {
       this._chart.destroy();
     }
 
-    let chartContainer = this.refs.horizontalBarChart;
+    let chartContainer = this.refs.gamesThisWeekLineChart;
     this._chart = new Chart(chartContainer, {
       type: 'horizontalBar',
       data: this.props.data,
@@ -80,14 +80,14 @@ class HorizontalLineChart extends Component {
 
     return (
       <div className="chartWrapper" ref="chartWrapper">
-        <canvas ref="horizontalBarChart" width={width} height={height} style={style} />
+        <canvas ref="gamesThisWeekLineChart" width={width} height={height} style={style} />
       </div>
     );
   }
 
 }
 
-export default HorizontalLineChartContainer = createContainer(props => {
+export default GamesThisWeekLineChartContainer = createContainer(props => {
 
   let { week, users, getWinningCount } = props;
 
@@ -100,7 +100,6 @@ export default HorizontalLineChartContainer = createContainer(props => {
     backgroundColor: [],
     data: []
   };
-
 
   _.each(users, user => {
     labels.push(_.upperFirst(user.username));
@@ -116,4 +115,4 @@ export default HorizontalLineChartContainer = createContainer(props => {
     data
   };
 
-}, HorizontalLineChart);
+}, GamesThisWeekLineChart);

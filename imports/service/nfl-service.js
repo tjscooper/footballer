@@ -306,7 +306,7 @@ export default class NFLService {
     if (!week) {
 
       let new_week = new Week({
-        leagueId: '2017-18',
+        leagueId: '2018-19',
         nflWeek: data.w,
         createdAt: new Date(),
         games: []

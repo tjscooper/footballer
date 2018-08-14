@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 import _ from 'lodash';
 
-import HorizontalLineChartContainer from './HorizontalLineChart.jsx';
+import GamesThisWeekLineChartContainer from './GamesThisWeekLineChart.jsx';
 import Games from './Games.jsx';
 import GameService from '../service/game-service';
 import Pick from '../model/pick.js';
@@ -24,7 +24,7 @@ class Dashboard extends Component {
 
     return (
       <div>
-        <HorizontalLineChartContainer
+        <GamesThisWeekLineChartContainer
           week={ week }
           users={ users }
           getWinningCount={ GameService.getWinningCount } />

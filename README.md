@@ -4,6 +4,9 @@ Version 2.0 of my Meteor app for following NFL weekly winners
 ## stack
 This app uses Meteor, React, MongoDb and Semantic UI.
 
+## set local db (if restoring from production)
+`export MONGO_URL=mongodb://localhost:27017/footballer`
+
 ## starting the app
 Navigate to app root folder and type:
 `meteor`
@@ -43,16 +46,33 @@ errors `tail -f /root/.pm2/logs/footballer-error.log`
 
 installing nodejs on ubuntu `sudo apt-get install -y nodejs`
 
-*server db dump to local restore*
+*server db dump to local restore (from docker image)*
 
-log into server as user 'tjscooper', run `mongodump -d footballer -o footballer-dump` from outside of app folder
+log into server
+`ssh <user>@<domain>` and enter password
 
-make root the owner, `chown -R tjscooper footballer-dump`
+get a list of docker images
+`docker ps`
 
-exit server and copy files from server to local folder using,
-`sudo scp -r tjscooper@middlelogic.com:/var/www/footballer-dump footballer-dump` and enter password
+use the name of the mongodb docker image to open bash terminal
+`docker exec -it mongodb bash`
 
-drop and restore to local database using, `mongorestore --drop --db footballer footballer-dump/footballer`
+*(optional) check out the mongodb itself
+`mongo` them `exit`
+
+navigate to the root folder
+`cd /`
+
+dump the database (inside the image)
+`mongodump -o /dump/` and then `exit`
+
+copy the dump from the image to the server root
+`docker cp mongodb:/dump .` and then `exit`
+
+copy files from server to local folder using,
+`scp -r <user>@<domain>:/root/dump .` and enter password
+
+drop and restore to local database using, `mongorestore --drop --db footballer ./dump/footballer`
 
 *nginx notes*
 
@@ -80,7 +100,7 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 }
-```  
+```
 
 test and restart nginx
 
