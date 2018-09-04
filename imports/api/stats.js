@@ -6,7 +6,7 @@ import { WeeksCollection } from '../model/week.js';
 if (Meteor.isServer) {
   Meteor.publish('stats.games.won', function ({ leagueId }) {
     ReactiveAggregate(this, WeeksCollection, [
-      { $match: { leagueId } },
+      { $match: { leagueId, seasonType: { $ne: 'PRE' } } },
       { $project: { 'games.nflGameId': 1, 'games.winner': 1 } },
       { $unwind: '$games' },
       { $unwind: '$games.winner' },
