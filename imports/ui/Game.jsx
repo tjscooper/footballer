@@ -35,9 +35,9 @@ export default class PickGame extends Component {
 
   renderGameTimeOrQuarter(quarter, time, day, gameClock) {
     if (quarter === 'FINAL') {
-      return `${ moment(day, 'MM-DD-YYYY').format('ddd') } ${ moment(time, 'HH:mm:ss').format('h:mma') }`;
+      return `Final`;
     } else {
-      return  `${gameClock} ${quarter}`;
+      return `${gameClock} ${quarter}`;
     }
   }
 
