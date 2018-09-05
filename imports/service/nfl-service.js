@@ -78,7 +78,7 @@ export default class NFLService {
   }
 
   static _parseStandings(error, response, data) {
-    if (_.isNil(data)) {
+    if (error || _.isNil(data)) {
       return;
     }
     const leagueId = '2018-19';
