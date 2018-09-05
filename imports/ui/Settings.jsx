@@ -15,6 +15,10 @@ export default class Settings extends Component {
     NFLService.getScores();
   }
 
+  static getStandings() {
+    NFLService.getStandings();
+  }
+
   static getSpreads() {
     ProlineService.getPointSpread();
   }
@@ -23,20 +27,23 @@ export default class Settings extends Component {
     return (
       <div>
         <div className="ui divider hidden"></div>
-        <button
-          className={ classnames('ui button') }
+        <div
+          className="ui button"
           onClick={ Settings.getScores.bind(null) }>
             Get Scores
-        </button>
-        <hr />
-        <button
-          className={ classnames('ui button') }
+        </div>
+        <div
+          className="ui button"
+          onClick={ Settings.getStandings.bind(null) }>
+            Get Standings
+        </div>
+        <div
+          className="ui button"
           onClick={ Settings.getSpreads.bind(null) }>
             Get Spreads
-        </button>
+        </div>
         <div className="ui divider hidden"></div>
       </div>
     );
   }
-
 }
