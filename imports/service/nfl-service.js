@@ -5,6 +5,7 @@ import _ from 'lodash';
 
 // import { nflData } from '../api/weeks.tests.data.js';
 import Week from '../model/week.js';
+import Standings from '../model/standings.js';
 import GameService from '../service/game-service.js';
 
 export default class NFLService {
@@ -56,6 +57,62 @@ export default class NFLService {
 
     // update games in week
     Meteor.call('weeks.update', week, 'games', games);
+
+  }
+
+  static getStandings() {
+    let random = Random.id();
+    let options = {
+      url: `https://feeds.nfl.com/feeds-rs/standings.json?random=${random}`,
+      json: true
+    };
+    const baseRequest = request.defaults({
+      headers: {
+        'Access-Control-Allow-Origin': 'http://localhost:3000',
+        'Access-Control-Allow-Credentials': true
+      }
+    })
+
+    request(options, Meteor.bindEnvironment(NFLService._parseStandings));
+
+  }
+
+  static _parseStandings(error, response, data) {
+    if (_.isNil(data)) {
+      return;
+    }
+    const leagueId = '2018-19';
+    const excludeSeasonType = 'PRE';
+    let standings = Standings.findOne({ leagueId, seasonType: { $ne: excludeSeasonType } });
+
+    // if week !exists, insert week and continue...
+    if (!standings) {
+      let new_standings = new Standings({
+        leagueId,
+        seasonType,
+        createdAt: new Date(),
+        teams: []
+      });
+
+      Meteor.call('standings.insert', new_standings);
+
+      standings = Standings.findOne({ leagueId, seasonType: { $ne: excludeSeasonType } });
+    }
+
+    // parse standings by team
+    const teams = data.teamStandings.reduce((result, { team, standing }) => {
+      const standings = {
+        city: team.abbr,
+        wins: standing.overallWins,
+        losses: standing.overallLosses,
+        ties: standing.overallTies,
+        streak: standing.overallStreak
+      }
+      return result.concat(standings);
+    }, []);
+
+    // update games in week
+    Meteor.call('standings.update', standings, 'teams', teams);
 
   }
 

@@ -37,7 +37,8 @@ Meteor.startup(() => {
   CronService.register();
   CronService.start();
 
-  ProlineService.getPointSpread();
   NFLService.getScores();
+  NFLService.getStandings();
 
+  ProlineService.getPointSpread();
 });
