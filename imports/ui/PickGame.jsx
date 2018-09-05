@@ -25,7 +25,6 @@ export default class PickGame extends Component {
   render() {
 
     let { game, index } = this.props;
-    console.log(game);
     return (
       <div className="row">
         <div className="column">

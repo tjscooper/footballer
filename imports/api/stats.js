@@ -7,9 +7,10 @@ if (Meteor.isServer) {
   Meteor.publish('stats.games.won', function ({ leagueId }) {
     ReactiveAggregate(this, WeeksCollection, [
       { $match: { leagueId, seasonType: { $ne: 'PRE' } } },
-      { $project: { 'games.nflGameId': 1, 'games.winner': 1 } },
+      { $project: { 'games.nflGameId': 1, 'games.winner': 1, 'games.quarter': 1 } },
       { $unwind: '$games' },
       { $unwind: '$games.winner' },
+      { $match: { 'games.quarter': { $eq: 'FINAL' } } },
       { $lookup: { from: 'picks', localField: 'games.nflGameId', foreignField: 'nflGameId', as: 'picks' } },
       { $unwind: '$picks' },
       { $project: { 'games': 1, 'picks': 1, 'total': { $sum: 1 } } },

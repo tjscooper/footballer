@@ -22,7 +22,7 @@ export default class PickGame extends Component {
 
     let color = 'black';
 
-    if (winner.length === 1 && city === winner[0] && quarter !== 'P') {
+    if (winner.length === 1 && city === winner[0] && quarter !== '') {
       color = 'green';
     }
 
@@ -36,8 +36,10 @@ export default class PickGame extends Component {
   renderGameTimeOrQuarter(quarter, time, day, gameClock) {
     if (quarter === 'FINAL') {
       return `Final`;
-    } else {
+    } else if (quarter !== '') {
       return `${gameClock} ${quarter}`;
+    } else {
+      return `${moment(day, 'MM-DD-YYYY').format('ddd')} ${moment(time, 'HH:mm:ss').format('h:mma')}`;
     }
   }
 
