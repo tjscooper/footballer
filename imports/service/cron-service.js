@@ -50,7 +50,7 @@ export default class CronService {
       name: 'Get standings from NFL website',
       schedule: function (parser) {
         // parser is a later.parse object
-        return parser.text('at 1:00 am every Monday and Tuesday');
+        return parser.text('at 1:30 am every Monday and Tuesday');
       },
       job: function () {
         // Live Data
