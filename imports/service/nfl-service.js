@@ -78,25 +78,24 @@ export default class NFLService {
   }
 
   static _parseStandings(error, response, data) {
-    if (_.isNil(data)) {
+    if (error || _.isNil(data)) {
       return;
     }
     const leagueId = '2018-19';
-    const excludeSeasonType = 'PRE';
-    let standings = Standings.findOne({ leagueId, seasonType: { $ne: excludeSeasonType } });
+    let standings = Standings.findOne({ leagueId, seasonType: data.seasonType });
 
     // if week !exists, insert week and continue...
     if (!standings) {
       let new_standings = new Standings({
         leagueId,
-        seasonType,
+        seasonType: data.seasonType,
         createdAt: new Date(),
         teams: []
       });
 
       Meteor.call('standings.insert', new_standings);
 
-      standings = Standings.findOne({ leagueId, seasonType: { $ne: excludeSeasonType } });
+      standings = Standings.findOne({ leagueId, seasonType: data.seasonType });
     }
 
     // parse standings by team
