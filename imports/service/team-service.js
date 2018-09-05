@@ -8,13 +8,13 @@ export default class TeamService {
       homeTeam: TeamService._parseTeam({
         city: game.gameSchedule.homeTeam.abbr,
         nickname: game.gameSchedule.homeNickname,
-        score: game.score.homeTeamScore.pointTotal,
+        score: !game.score ? 0 : game.score.homeTeamScore.pointTotal,
         teamId: game.gameSchedule.homeTeamId
       }),
       visitorTeam: TeamService._parseTeam({
         city: game.gameSchedule.visitorTeam.abbr,
         nickname: game.gameSchedule.visitorNickname,
-        score: game.score.visitorTeamScore.pointTotal,
+        score: !game.score ? 0 : game.score.visitorTeamScore.pointTotal,
         teamId: game.gameSchedule.visitorTeamId
       })
     };

@@ -25,25 +25,29 @@ export default class PickGame extends Component {
   render() {
 
     let { game, index } = this.props;
-
+    console.log(game);
     return (
       <div className="row">
         <div className="column">
           <button
-            className={ classnames('ui basic button', { 'positive' : game.visitor.city === game.pick.city, 'disabled': game.quarter !== 'P' }) }
+            className={ classnames('ui basic button', { 'positive' : game.visitor.city === game.pick.city, 'disabled': game.quarter !== '' }) }
             onClick={ PickGame.togglePick.bind(null, { nflGameId: game.nflGameId, city: game.visitor.city }) }>
             <p>{ game.visitor.nickname } ({ game.visitor.city })</p>
           </button>
-          <p>{ game.visitor.record.wins } - { game.visitor.record.losses } - { game.visitor.record.ties } ({ game.visitor.record.streak })</p>
+          <p>{ game.visitor.record.wins } - { game.visitor.record.losses } - { game.visitor.record.ties }
+            { game.visitor.record.streak ? `(${ game.visitor.record.streak })` : '' }
+          </p>
         </div>
         <div className="column">{ this.renderSpread(game.spread) }</div>
         <div className="column">
           <button
-            className={ classnames('ui basic button', { 'positive' : game.home.city === game.pick.city, 'disabled': game.quarter !== 'P'  }) }
+            className={ classnames('ui basic button', { 'positive' : game.home.city === game.pick.city, 'disabled': game.quarter !== ''  }) }
             onClick={ PickGame.togglePick.bind(null, { nflGameId: game.nflGameId, city: game.home.city }) }>
             <p>{ game.home.nickname } ({ game.home.city })</p>
           </button>
-          <p>{ game.home.record.wins } - { game.home.record.losses } - { game.home.record.ties } ({ game.home.record.streak })</p>
+          <p>{ game.home.record.wins } - { game.home.record.losses } - { game.home.record.ties }
+            { game.home.record.streak ? `(${game.home.record.streak})` : '' }
+          </p>
         </div>
       </div>
     );
