@@ -47,6 +47,18 @@ export default class CronService {
     });
 
     SyncedCron.add({
+      name: 'Get standings from NFL website',
+      schedule: function (parser) {
+        // parser is a later.parse object
+        return parser.text('every 2 minutes every Thursday, Saturday, Sunday, and Monday');
+      },
+      job: function () {
+        // Live Data
+        NFLService.getStandings();
+      }
+    });
+
+    SyncedCron.add({
       name: 'Get point spread from Proline website',
       schedule: function(parser) {
         // parser is a later.parse object

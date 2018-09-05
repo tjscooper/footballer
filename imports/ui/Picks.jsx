@@ -20,12 +20,14 @@ export default class Picks extends Component {
         <div className="grey row">
           <div className="column">
             <p>Visitor</p>
+            <p>W - L - T (Streak)</p>
           </div>
           <div className="column">
             <p>Spread</p>
           </div>
           <div className="column">
             <p>Home</p>
+            <p>W - L - T (Streak)</p>
           </div>
         </div>
       </div>
@@ -72,14 +74,15 @@ export default class Picks extends Component {
 
 export default PicksContainer = createContainer(props => {
 
-  let picks, week;
+  let picks, week, standings;
 
   let subs = {
     weeks: Meteor.subscribe('weeks.last'),
     picks: Meteor.subscribe('picks'),
+    standings: Meteor.subscribe('standings.last')
   };
 
-  if (subs.weeks.ready() && subs.picks.ready()) {
+  if (subs.weeks.ready() && subs.picks.ready() && subs.standings.ready()) {
 
     // Find the latest week
     week = Week.find({}, { sort: { nflWeek: -1 }, limit: 1 }).fetch()[0];
@@ -91,14 +94,16 @@ export default PicksContainer = createContainer(props => {
       // Get user picks (must be logged in)
       picks = Pick.find({}, { $in: { nflGameId: gameIds, userId: Meteor.userId() } }).fetch();
 
+      // Get standings
+      standings = Standings.find({}).fetch()[0];
+
       // Add picks to games (for quick styling)
       _.each(week.games, game => {
-
         let { nflGameId } = game;
         let pick = _.find(picks, { nflGameId, userId: Meteor.userId() }) || { city: null };
-
         game.pick = pick;
-
+        game.home.record = standings.teams.filter((team) => team.city === game.home.city)[0];
+        game.visitor.record = standings.teams.filter((team) => team.city === game.visitor.city)[0];
       });
     }
   }
