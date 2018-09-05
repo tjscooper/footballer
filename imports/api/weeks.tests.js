@@ -19,6 +19,7 @@ if (Meteor.isServer) {
         week = new Week({
           leagueId: '123',
           nflWeek: 1,
+          seasonType: 'REG',
           createdAt: new Date(),
           games: []
         });
@@ -28,6 +29,7 @@ if (Meteor.isServer) {
         week2 = new Week({
           leagueId: '123',
           nflWeek: 2,
+          seasonType: 'REG',
           createdAt: new Date(),
           games: []
         });
