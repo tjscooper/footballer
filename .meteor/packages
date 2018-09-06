@@ -24,8 +24,7 @@ semantic:ui
 less
 juliancwirko:postcss
 kadira:flow-router
-static-html
 jagi:astronomy
 percolate:synced-cron
-iandouglas:accounts-ui-semantic-ui
 jcbernack:reactive-aggregate
+okgrow:accounts-ui-react

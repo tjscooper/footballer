@@ -21,7 +21,7 @@ body {
 }
 
 .ui.dropdown .menu {
-  left: -225%;
+  left: 225%;
 }
 
 p.quarter {

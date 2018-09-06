@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { createContainer } from 'meteor/react-meteor-data';
 
 import MainMenu from './MainMenu.jsx';
-import AccountsUIWrapper from './AccountsUIWrapper.jsx';
+import { LoginButtons } from 'meteor/okgrow:accounts-ui-react';
 
 class App extends Component {
 
@@ -15,11 +15,11 @@ class App extends Component {
       <div className="ui container">
         <div className="main-header">
           <div className="ui clearing basic segment">
-            <div className="ui right floated header login" style={{ fontSize: '14px' }}>
-              <AccountsUIWrapper />
+            <div className="ui right header" style={{ fontSize: '16px' }}>
+              <i className="trophy icon"></i> Footballer
             </div>
             <h3 className="ui left floated header">
-              <i className="trophy icon"></i> Footballer
+              <LoginButtons />
             </h3>
           </div>
         </div>
