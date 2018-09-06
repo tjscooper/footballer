@@ -66,7 +66,7 @@ export default class PickGame extends Component {
       return picks.indexOf(Meteor.user().username) > -1 ? true : false;
     });
 
-    if (quarter !== 'FINAL' && !_.isEmpty(picks)) {
+    if (quarter !== '' && !_.isEmpty(picks)) {
       return (
         <div
           className="ui icon button"
