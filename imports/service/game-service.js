@@ -83,7 +83,7 @@ export default class GameService {
       yardlineNumber: !game.score ? '' : game.score.yardlineNumber.toString(),
       possessionTeamId: !game.score ? '' : game.score.possessionTeamId,
       possessionTeamAbbr: !game.score ? '' : game.score.possessionTeamAbbr,
-      alertPlayType: !game.score ? '' : game.score.alertPlayType.toString(),
+      alertPlayType: !game.score || _.isNull(game.score.alertPlayType) ? '' : game.score.alertPlayType,
       home: homeTeam,
       visitor: visitorTeam,
       winner,
