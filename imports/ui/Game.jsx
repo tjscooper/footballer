@@ -84,6 +84,15 @@ export default class PickGame extends Component {
   render() {
 
     let { game, index } = this.props;
+    const visitorRedZone = game.score
+      && game.score.redZone && game.possessionTeamAbbr === game.visitor.city
+       ? { borderRight: '6px red solid' }
+       : null;
+    const homeRedZone = game.score
+      && game.score.redZone && game.possessionTeamAbbr === game.home.city
+      ? { borderLeft: '6px red solid' }
+      : null;
+
 
     return (
       <div className="row">
@@ -92,7 +101,7 @@ export default class PickGame extends Component {
             { this.renderPickLabels(game.quarter, game.visitor.picks, 'visitor') }
           </span>
         </div>
-        <div className="four wide column">
+        <div className="four wide column" style={ visitorRedZone }>
           <div className="ui mini statistic">
             { this.renderScore(game.visitor.city, game.visitor.score, game.winner, game.quarter) }
             <div className="label">
@@ -104,7 +113,7 @@ export default class PickGame extends Component {
           <p className="quarter">{ this.renderGameTimeOrQuarter(game.quarter, game.time, game.day, game.gameClock) }</p>
           <p className="spread">{ this.renderSpread(game.spread) }</p>
         </div>
-        <div className="four wide column">
+        <div className="four wide column" style={ homeRedZone } >
           <div className="ui mini statistic">
             { this.renderScore(game.home.city, game.home.score, game.winner, game.quarter) }
             <div className="label">
