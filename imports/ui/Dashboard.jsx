@@ -58,6 +58,8 @@ export default DashboardContainer = createContainer(props => {
 
     if (!_.isNil(week)) {
 
+      week.games = _.orderBy(week.games, game => game.nflGameId);
+
       // Get a subset of nflGameId's from this week's games
       let gameIds = _.map(week.games, 'nflGameId');
 
