@@ -20,15 +20,17 @@ export default class PickGame extends Component {
 
   renderScore(city, score, winner, quarter) {
 
-    let color = 'black';
+    let scoreColor = 'black';
+    let scoreWeight = 'normal';
 
     if (winner.length === 1 && city === winner[0] && quarter !== '') {
-      color = 'green';
+      scoreColor = 'green';
+      scoreWeight = 'bold';
     }
 
     return (
       <div className="value">
-        <span style={{ color }}>{ score }</span>
+        <span style={{ color: scoreColor, fontWeight: scoreWeight }}>{ score }</span>
       </div>
     );
   }
@@ -66,7 +68,7 @@ export default class PickGame extends Component {
       return picks.indexOf(Meteor.user().username) > -1 ? true : false;
     });
 
-    if (quarter !== '' && !_.isEmpty(picks)) {
+    if ((quarter !== '' && quarter !== 'PREGAME') && !_.isEmpty(picks)) {
       return (
         <div
           className="ui icon button"
@@ -82,17 +84,13 @@ export default class PickGame extends Component {
   }
 
   render() {
-
     let { game, index } = this.props;
-    const visitorRedZone = game.score
-      && game.score.redZone && game.possessionTeamAbbr === game.visitor.city
+    const visitorRedZone = game.redZone && game.possessionTeamAbbr === game.visitor.city
        ? { borderRight: '6px red solid' }
        : null;
-    const homeRedZone = game.score
-      && game.score.redZone && game.possessionTeamAbbr === game.home.city
+    const homeRedZone = game.redZone && game.possessionTeamAbbr === game.home.city
       ? { borderLeft: '6px red solid' }
       : null;
-
 
     return (
       <div className="row">
