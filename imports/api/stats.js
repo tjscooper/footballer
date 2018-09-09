@@ -10,7 +10,7 @@ if (Meteor.isServer) {
       { $project: { 'games.nflGameId': 1, 'games.winner': 1, 'games.quarter': 1 } },
       { $unwind: '$games' },
       { $unwind: '$games.winner' },
-      { $match: { 'games.quarter': { $eq: 'FINAL' } } },
+      { $match: { 'games.quarter': { $in: ['FINAL', 'FINAL_OVERTIME'] } } },
       { $lookup: { from: 'picks', localField: 'games.nflGameId', foreignField: 'nflGameId', as: 'picks' } },
       { $unwind: '$picks' },
       { $project: { 'games': 1, 'picks': 1, 'total': { $sum: 1 } } },
