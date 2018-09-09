@@ -37,7 +37,13 @@ export default class PickGame extends Component {
 
   renderGameTimeOrQuarter(quarter, time, day, gameClock) {
     if (quarter === 'FINAL') {
-      return `Final`;
+      return 'Final';
+    } else if (quarter === 'FINAL_OVERTIME') {
+      return 'Final OT';
+    } else if (quarter === 'SUSPENDED') {
+      return 'Suspended';
+    } else if (quarter === 'HALFTIME') {
+      return 'Halftime';
     } else if (quarter !== '') {
       return `${gameClock} ${quarter}`;
     } else {
@@ -86,10 +92,10 @@ export default class PickGame extends Component {
   render() {
     let { game, index } = this.props;
     const visitorRedZone = game.redZone && game.possessionTeamAbbr === game.visitor.city
-       ? { borderRight: '6px red solid' }
+       ? { borderRight: '4px red solid' }
        : null;
     const homeRedZone = game.redZone && game.possessionTeamAbbr === game.home.city
-      ? { borderLeft: '6px red solid' }
+      ? { borderLeft: '4px red solid' }
       : null;
 
     return (
@@ -102,7 +108,7 @@ export default class PickGame extends Component {
         <div className="four wide column" style={ visitorRedZone }>
           <div className="ui mini statistic">
             { this.renderScore(game.visitor.city, game.visitor.score, game.winner, game.quarter) }
-            <div className="label">
+            <div className="label" style={ { fontSize: '12px' } }>
               { game.visitor.nickname }
             </div>
           </div>
@@ -114,7 +120,7 @@ export default class PickGame extends Component {
         <div className="four wide column" style={ homeRedZone } >
           <div className="ui mini statistic">
             { this.renderScore(game.home.city, game.home.score, game.winner, game.quarter) }
-            <div className="label">
+            <div className="label" style={{ fontSize: '12px' }}>
               { game.home.nickname }
             </div>
           </div>
