@@ -44,7 +44,7 @@ export default class PickGame extends Component {
       return 'Suspended';
     } else if (quarter === 'HALFTIME') {
       return 'Halftime';
-    } else if (quarter !== '' || quarter !== 'PREGAME') {
+    } else if (quarter !== '' && quarter !== 'PREGAME') {
       return `${gameClock} ${quarter}`;
     } else {
       return `${moment(day, 'MM-DD-YYYY').format('ddd')} ${moment(time, 'HH:mm:ss').format('h:mma')}`;
