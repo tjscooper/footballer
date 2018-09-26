@@ -1,5 +1,5 @@
 # footballer
-Version 3.4.0.2 of my Meteor app for following NFL weekly winners
+Version 3.4.1 of my Meteor app for following NFL weekly winners
 
 ## stack
 This app uses Meteor, React, MongoDb and Semantic UI.
