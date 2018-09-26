@@ -40,7 +40,7 @@ class App extends Component {
               Disclaimer: Notice of Intent
             </h4>
           </div>
-          <div className="sixteen wide column" style={{ color: '#e5e5e5' }}>
+          <div className="sixteen wide column" style={{ color: '#d3d3d3' }}>
             <p>This app was created purely for educational purposes. The developer does not claim any IP for the body of work known as, "footballer". The data stored, obtained, and used herein is not used for personal or commercial monetary gain in any way, shape or form.</p>
             <p>Any comments or concerns relative to this application should be directed to <a href="mailto:footballer.app@gmail.com">footballer.app@gmail.com</a></p>
             <p>The developer of this application reserves the right to discontinue hosting / cease operation of footballer upon recieving reasonable concern without penalties or legal action.</p>
