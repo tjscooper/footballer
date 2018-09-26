@@ -46,7 +46,7 @@ export default class MainMenu extends Component {
     }
 
     return (
-      <div className="ui secondary menu">
+      <div className="ui secondary pointing menu">
         {
           menuItems.map((item, index) => {
 

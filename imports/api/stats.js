@@ -6,7 +6,7 @@ import { WeeksCollection } from '../model/week.js';
 if (Meteor.isServer) {
   Meteor.publish('stats.games.won', function ({ leagueId }) {
     ReactiveAggregate(this, WeeksCollection, [
-      { $match: { leagueId, seasonType: { $ne: 'PRE' } } },
+      { $match: { leagueId, seasonType: { $eq: 'REG' } } },
       { $project: { 'games.nflGameId': 1, 'games.winner': 1, 'games.quarter': 1 } },
       { $unwind: '$games' },
       { $unwind: '$games.winner' },
@@ -27,5 +27,56 @@ if (Meteor.isServer) {
       },
       { $sort: { wins: -1 } }
     ], { clientCollection: "StatsGamesWon" });
+  });
+
+  Meteor.publish('stats.weekly.winners', function ({ leagueId }) {
+    ReactiveAggregate(this, WeeksCollection, [
+      { $match: { leagueId, seasonType: { $eq: 'REG' } } },
+      { $unwind: '$games' },
+      { $match: { 'games.quarter': { $in: ['FINAL', 'FINAL_OVERTIME'] } } },
+      { $lookup: { from: 'picks', localField: 'games.nflGameId', foreignField: 'nflGameId', as: 'picks' } },
+      {
+        $project: {
+          _id: 0,
+          nflWeek: 1,
+          nflGameId: '$games.nflGameId',
+          winner: { $arrayElemAt: ['$games.winner', 0] },
+          picks: {
+            $filter: {
+              input: '$picks',
+              as: 'picks',
+              cond: { $eq: ['$$picks.city', { $arrayElemAt: ['$games.winner', 0] }] }
+            }
+          }
+        }
+      },
+      { $unwind: '$picks' },
+      { $lookup: { from: 'users', localField: 'picks.userId', foreignField: '_id', as: 'user' } },
+      { $unwind: '$user' },
+      {
+        $project: {
+          nflWeek: 1,
+          nflGameId: 1,
+          winner: 1,
+          userId: '$user._id',
+          username: '$user.username',
+          pick: '$picks.city'
+        }
+      },
+      {
+        $group: {
+          _id: '$nflWeek',
+          data: {
+            $push: {
+              userId: '$userId',
+              username: '$username',
+              nflGameId: '$nflGameId',
+              pick: '$pick'
+            }
+          }
+        }
+      },
+      { $sort: { _id: -1 } }
+    ], { clientCollection: "StatsWeeklyWinners" });
   });
 }
