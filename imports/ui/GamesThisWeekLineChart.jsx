@@ -19,7 +19,7 @@ class GamesThisWeekLineChart extends Component {
           display: false
         },
         title: {
-          display: true,
+          display: false,
           text: `Week ${ props.week.nflWeek }`
         },
         responsive: true,

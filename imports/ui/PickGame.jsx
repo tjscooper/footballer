@@ -34,7 +34,7 @@ export default class PickGame extends Component {
             <p>{ game.visitor.nickname } ({ game.visitor.city })</p>
           </button>
           <p>{ game.visitor.record.wins } - { game.visitor.record.losses } - { game.visitor.record.ties }
-            { game.visitor.record.streak ? `(${ game.visitor.record.streak })` : '' }
+            { game.visitor.record.streak ? ` (${ game.visitor.record.streak })` : '' }
           </p>
         </div>
         <div className="column">{ this.renderSpread(game.spread) }</div>
@@ -45,7 +45,7 @@ export default class PickGame extends Component {
             <p>{ game.home.nickname } ({ game.home.city })</p>
           </button>
           <p>{ game.home.record.wins } - { game.home.record.losses } - { game.home.record.ties }
-            { game.home.record.streak ? `(${game.home.record.streak})` : '' }
+            { game.home.record.streak ? ` (${game.home.record.streak})` : '' }
           </p>
         </div>
       </div>

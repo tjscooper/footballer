@@ -23,16 +23,24 @@ class Dashboard extends Component {
     }
 
     return (
-      <div>
-        <GamesThisWeekLineChartContainer
-          week={ week }
-          users={ users }
-          getWinningCount={ GameService.getWinningCount } />
-        <div className="ui divider hidden"></div>
-        <Games
-          week={ week }
-          picks={ picks }
-          users={ users } />
+      <div className="ui grid">
+        <div className="sixteen wide column">
+          <h4 className="ui horizontal divider header">
+            { `Week ${week.nflWeek}` }
+          </h4>
+        </div>
+        <div className="sixteen wide column">
+          <GamesThisWeekLineChartContainer
+            week={ week }
+            users={ users }
+            getWinningCount={ GameService.getWinningCount } />
+        </div>
+        <div className="sixteen wide column">
+          <Games
+            week={ week }
+            picks={ picks }
+            users={ users } />
+        </div>
       </div>
     );
   }

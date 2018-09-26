@@ -12,29 +12,38 @@ class App extends Component {
 
   render() {
     return (
-      <div className="ui container">
-        <div className="main-header">
-          <div className="ui clearing basic segment">
-            <div className="ui right header" style={{ fontSize: '16px' }}>
-              <i className="trophy icon"></i> Footballer
+      <div className="ui container raised">
+        <div className="ui top fixed massive borderless inverted menu">
+          <div className="item">
+            <h4><i className="trophy icon"></i> FOOTBALLER</h4>
+          </div>
+          <div className="right menu">
+            <div className="item">
+              <LoginButtons align='right' />
             </div>
-            <h3 className="ui left floated header">
-              <LoginButtons />
-            </h3>
           </div>
         </div>
-        <MainMenu />
-        <div className="main-content">
-          { this.props.mainContent }
-        </div>
-        <div className="ui vertical footer segment">
-          <div className="ui stackable divided equal height stackable grid">
-            <div className="column">
-              <h4 className="ui header">Footballer Disclaimer: Notice of Intent</h4>
-              <p>This app was created purely for educational purposes. The developer does not claim any IP for the body of work known as, "footballer". The data stored, obtained, and used herein is not used for personal or commercial monetary gain in any way, shape or form.</p>
-              <p>Any comments or concerns relative to this application should be directed to <a href="mailto:footballer.app@gmail.com">footballer.app@gmail.com</a></p>
-              <p>The developer of this application reserves the right to discontinue hosting / cease operation of footballer upon recieving reasonable concern without penalties or legal action.</p>
+        <div className="ui grid">
+          <div className="sixteen wide column">
+            <MainMenu />
+          </div>
+          <div className="sixteen wide column">
+            <div className="main-content">
+              { this.props.mainContent }
             </div>
+          </div>
+        </div>
+        <div className="ui grid">
+          <div className="sixteen wide column">
+            <h4 className="ui horizontal divider header">
+              {/* <i className="bar chart icon"></i> */ }
+              Disclaimer: Notice of Intent
+            </h4>
+          </div>
+          <div className="sixteen wide column" style={{ color: '#e5e5e5' }}>
+            <p>This app was created purely for educational purposes. The developer does not claim any IP for the body of work known as, "footballer". The data stored, obtained, and used herein is not used for personal or commercial monetary gain in any way, shape or form.</p>
+            <p>Any comments or concerns relative to this application should be directed to <a href="mailto:footballer.app@gmail.com">footballer.app@gmail.com</a></p>
+            <p>The developer of this application reserves the right to discontinue hosting / cease operation of footballer upon recieving reasonable concern without penalties or legal action.</p>
           </div>
         </div>
       </div>

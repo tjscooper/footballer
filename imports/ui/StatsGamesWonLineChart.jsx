@@ -19,8 +19,8 @@ class StatsGamesWonLineChart extends Component {
           display: false
         },
         title: {
-          display: true,
-          text: `Games Won`
+          display: false,
+          text: `Total Games Won`
         },
         responsive: true,
         maintainAspectRatio: true,

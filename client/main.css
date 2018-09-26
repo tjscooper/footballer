@@ -3,7 +3,12 @@ body {
 }
 
 .ui.secondary.menu {
-  margin-left: -18px;
+  margin-top: 24px;
+  margin-left: -12px;
+}
+
+a#login-name-link.login-link-text {
+  color: #FFF !important;
 }
 
 .main-header {
