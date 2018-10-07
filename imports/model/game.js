@@ -13,7 +13,10 @@ export default Game = Class.create({
     quarter: String,
     time: String,
     day: String,
-    redZone: Boolean,
+    redZone: {
+      type: Boolean,
+      optional: true
+    },
     gameClock: String,
     down: Number,
     yardsToGo: Number,
